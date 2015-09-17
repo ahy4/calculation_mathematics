@@ -34,34 +34,22 @@ public class Matrix {
         return Arrays.deepEquals(mtx.toArray(), this.mtx);
     }
 
-    public Matrix plus(Matrix mat0) {
-        return plus(mat0.toArray());
+    public Matrix plus(Matrix mtx0) {
+        return newMatrix(Calc.addMat(mtx, mtx0.toArray()));
     }
-    public Matrix plus(double[][] mtx0) {
-        return newMatrix(Calc.addMat(mtx, mtx0));
-    }
-    public Matrix minus(Matrix mat0) {
-        return minus(mat0.toArray());
-    }
-    public Matrix minus(double[][] mtx0) {
-        return newMatrix(mtx).plus(newMatrix(mtx0).negative());
+    public Matrix minus(Matrix mtx0) {
+        return newMatrix(mtx).plus(newMatrix(mtx0.toArray()).negative());
     }
     public Matrix negative() {
         return newMatrix(mtx).multiply(-1);
     }
 
     public Matrix multiply(Matrix mtx0) {
-        return multiply(mtx0.toArray());
-    }
-    public Matrix multiply(double[][] mtx0) {
-        return newMatrix(Calc.multipleMat(mtx, mtx0));
+        return newMatrix(Calc.multipleMat(mtx, mtx0.toArray()));
     }
 
     public Vector multiply(Vector vec) {
-        return multiply(vec.toArray());
-    }
-    public Vector multiply(double[] ary) {
-        return Vector.newVector(Calc.matVec(mtx, ary));
+        return Vector.newVector(Calc.matVec(mtx, vec.toArray()));
     }
 
     public Matrix multiply(double num) {
