@@ -8,6 +8,7 @@ import java.util.stream.IntStream;
  * Created by yuya on 2015/06/13.
  */
 public class Vector {
+
     private double[] ary;
 
     public Vector(double[] ary) {
@@ -21,32 +22,23 @@ public class Vector {
         return this.ary;
     }
 
-    public Vector multiply(double c) {
-        return newVector(Calc.scalarMultiple(c, ary));
-    }
-
     public Vector plus(Vector vec) {
-        return plus(vec.toArray());
+        return newVector(Calc.addVec(ary, vec.toArray()));
     }
-    public Vector plus(double[] ary0) {
-        return newVector(Calc.addVec(ary, ary0));
-    }
-
     public Vector minus(Vector vec) {
-        return minus(vec.toArray());
+        return plus(vec.negative());
     }
-    public Vector minus(double[] ary0) {
-        return plus(Calc.scalarMultiple(-1, ary0));
-    }
-
-    public double dot(double[] ary0) {
-        return Calc.innProd(ary, ary0);
+    public Vector negative() {
+        return newVector(Calc.scalarMultiple(-1, ary));
     }
     public double dot(Vector vec) {
-        return dot(vec.toArray());
+        return Calc.innProd(ary, vec.toArray());
     }
     public double multiply(Vector vec) {
         return dot(vec);
+    }
+    public Vector multiply(double c) {
+        return newVector(Calc.scalarMultiple(c, ary));
     }
 
     public double norm1() {

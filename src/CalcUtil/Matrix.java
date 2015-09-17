@@ -38,20 +38,17 @@ public class Matrix {
         return newMatrix(Calc.addMat(mtx, mtx0.toArray()));
     }
     public Matrix minus(Matrix mtx0) {
-        return newMatrix(mtx).plus(newMatrix(mtx0.toArray()).negative());
+        return this.plus(mtx0.negative());
     }
     public Matrix negative() {
         return newMatrix(mtx).multiply(-1);
     }
-
     public Matrix multiply(Matrix mtx0) {
         return newMatrix(Calc.multipleMat(mtx, mtx0.toArray()));
     }
-
     public Vector multiply(Vector vec) {
         return Vector.newVector(Calc.matVec(mtx, vec.toArray()));
     }
-
     public Matrix multiply(double num) {
         return newMatrix(Calc.scalarMultiple(num, mtx));
     }
@@ -59,7 +56,6 @@ public class Matrix {
     public double norm1() {
         return Calc.matNorm1(mtx);
     }
-
     public double normInf() {
         return Calc.matNormInf(mtx);
     }
