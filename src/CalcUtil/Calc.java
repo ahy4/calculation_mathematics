@@ -1,8 +1,15 @@
 package CalcUtil;
 
 import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.function.IntFunction;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static java.lang.Math.*;
 
@@ -109,7 +116,7 @@ public class Calc {
 
     static double matNorm1(double[][] mat) {
         return vecNormInf(
-            IntStream.range(0, mat.length - 1)
+            IntStream.range(0, mat.length)
                 .mapToDouble((i) -> vecNorm1(mat[i]))
                 .toArray()
         );
