@@ -8,6 +8,9 @@ public class Useful {
     public static Vector v(double... args) {
         return Vector.newVector(args);
     }
+    public static Vector v(double v) {
+        return Vector.newVector(new double[]{v});
+    }
 
     public static Matrix m(double[]... mtxs) {
         return Matrix.newMatrix(mtxs);
