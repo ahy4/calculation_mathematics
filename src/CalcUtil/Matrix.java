@@ -75,6 +75,22 @@ public class Matrix {
     }
 
     // TODO: .inverse()と、固有値求めるメソッドがほしい
+    public void set(Matrix m) {
+        mtx = m.toArray();
+    }
+    public void set(int i, int j, double v) {
+        mtx[i][j] = v;
+    }
+    public double get(int i, int j) {
+        return mtx[i][j];
+    }
+    public int rows() {
+        return mtx.length;
+    }
+    public int columns() {
+        return mtx[0].length;
+    }
+
 }
 
 interface TriFunction <T, U, V, W> {

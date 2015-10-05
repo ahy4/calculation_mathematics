@@ -76,4 +76,19 @@ public class Vector {
     public Matrix transpositionMatrix() {
         return Useful.m(this);
     }
+
+
+    public void set(Vector v) {
+        ary = v.toArray();
+    }
+    public void set(int idx, double value) {
+        ary[idx] = value;
+    }
+    public double get(int idx) {
+        return ary[idx];
+    }
+    public double length() {
+        return ary.length;
+    }
+
 }
