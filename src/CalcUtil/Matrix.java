@@ -19,6 +19,14 @@ public class Matrix {
     public static Matrix newMatrix(double[][] mtx0) {
         return new Matrix(mtx0);
     }
+    public static Matrix newMatrix(int height, int width, BiFunction<Integer, Integer, Double> callback) {
+        return newMatrix(Calc.matrixMap(new double[height][width], callback));
+    }
+    public static Matrix newMatrix(int size, BiFunction<Integer, Integer, Double> callback) {
+        return newMatrix(Calc.matrixMap(new double[size][size], callback));
+    }
+
+
 
     public double[][] toArray() {
         return this.mtx;
@@ -52,6 +60,9 @@ public class Matrix {
     public Matrix multiply(double num) {
         return newMatrix(Calc.scalarMultiple(num, mtx));
     }
+    public Matrix inverse() {
+        return newMatrix(Calc.inverse(mtx));
+    }
 
     public double norm1() {
         return Calc.matNorm1(mtx);
@@ -59,16 +70,28 @@ public class Matrix {
     public double normInf() {
         return Calc.matNormInf(mtx);
     }
+    public double normFrobenius() {
+        return Calc.matNormFrobenius(mtx);
+    }
+
+    public double norm(NormType type) {
+        switch (type) {
+            case ONE: return norm1();
+            case INF: return normInf();
+            case F: return normFrobenius();
+            default: return 0;
+        }
+    }
 
     public Matrix transposition() {
         return newMatrix(Calc.matTransposition(mtx));
     }
 
-    public Matrix map(TriFunction<Double, Integer, Integer, Double> callback) {
-        return newMatrix(Calc.matrixMap(mtx, (x, y) -> {
-            return callback.apply(mtx[x][y], x, y);
-        }));
-    }
+//    public Matrix map(TriFunction<Double, Integer, Integer, Double> callback) {
+//        return newMatrix(Calc.matrixMap(mtx, (x, y) -> {
+//            return callback.apply(mtx[x][y], x, y);
+//        }));
+//    }
 
     public int hashCode() {
         return this.toString().hashCode();

@@ -1,4 +1,5 @@
 package CalcUtil;
+import static CalcUtil.Useful.*;
 
 /**
  * Created by noko on 2015/09/28.

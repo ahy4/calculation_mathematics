@@ -50,6 +50,14 @@ public class Vector {
     public double normInf() {
         return Calc.vecNormInf(ary);
     }
+    public double norm(NormType type) {
+        switch (type) {
+            case ONE: return norm1();
+            case TWO: return norm2();
+            case INF: return normInf();
+            default: return 0;
+        }
+    }
 
     public String toString() {
         return Arrays.stream(ary)

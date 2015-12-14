@@ -1,5 +1,7 @@
 package CalcUtil;
 
+import CalculationForTest2.CholeskeyDecomposition;
+
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,10 +67,6 @@ public class Calc {
             .toArray();
     }
 
-    public static double[] residual(double[][] mat, double[] ary1, double[] ary2) {
-        return addVec(matVec(mat, ary1), ary2);
-    }
-
     public static double[][] addMat(double[][] mat1, double[][] mat2) {
         return matrixMap(mat1, (x, y) -> (double) x + y);
     }
@@ -101,10 +99,12 @@ public class Calc {
     }
 
     public static double vecNorm2(double[] ary) {
-        return IntStream
-            .range(0, ary.length)
-            .mapToDouble((i) -> ary[i] * ary[i])
-            .sum();
+        return Math.sqrt(
+            IntStream
+                .range(0, ary.length)
+                .mapToDouble((i) -> ary[i] * ary[i])
+                .sum()
+        );
     }
 
     public static double vecNormInf(double[] ary) {
@@ -125,9 +125,81 @@ public class Calc {
     public static double matNormInf(double[][] mat) {
         return matNorm1(matTransposition(mat));
     }
+    public static double matNormFrobenius(double[][] mtx) {
+        return Math.sqrt(
+            IntStream.range(0, mtx.length)
+                .mapToDouble(i -> Math.pow(vecNorm2(mtx[i]), 2))
+                .sum()
+        );
+    }
 
     public static double[][] matTransposition(double[][] mat) {
         return twoDimMap(mat[0].length, mat.length, (x, y) -> mat[y][x]);
+    }
+
+
+    public static double[][] inverse(double[][] mtx) {
+        int n = mtx.length;
+        double[][] e = new double[n][n];
+        for (int i = 0; i < n; i++) {
+            e[i][i] = 1;
+        }
+        double[][] y = new double[n][n];
+        double[][] x = new double[n][n];
+        LUResult res = LUDecomposition.exec(mtx);
+        for (int i = 0; i < n; i++) {
+            for (int k = 0; k < n; k++) {
+                y[k][i] = e[k][i];
+                for (int j = 0; j < k; j++) {
+                    y[k][i] -= res.L[k][j] * y[j][i];
+                }
+            }
+            for (int k = n - 1; k >= 0; k--) {
+                x[k][i] = y[k][i];
+                for (int j = k + 1; j < n; j++) {
+                    x[k][i] -= res.U[k][j] * x[j][i];
+                }
+                x[k][i] /= res.U[k][k];
+            }
+        }
+        return x;
+    }
+
+    public static double[][] inverseByCholeskey(double[][] mtx) {
+        int n = mtx.length;
+        double[][] e = new double[n][n];
+        for (int i = 0; i < n; i++) {
+            e[i][i] = 1;
+        }
+        double[][] y = new double[n][n];
+        double[][] x = new double[n][n];
+        LUResult res = new LUResult(n);
+        res.L = CholeskeyDecomposition.exec(mtx);
+        res.U = Matrix.newMatrix(res.L).transposition().toArray();
+        for (int i = 0; i < n; i++) {
+            for (int k = 0; k < n; k++) {
+                y[k][i] = e[k][i];
+                for (int j = 0; j < k; j++) {
+                    y[k][i] -= res.L[k][j] * y[j][i];
+                }
+            }
+            for (int k = n - 1; k >= 0; k--) {
+                x[k][i] = y[k][i];
+                for (int j = k + 1; j < n; j++) {
+                    x[k][i] -= res.U[k][j] * x[j][i];
+                }
+                x[k][i] /= res.U[k][k];
+            }
+        }
+        return x;
+    }
+
+    public static double sum(Function<Integer, Double> f, int start, int end) {
+        double sum = 0;
+        for (int j = start; j < end; j++) {
+            sum += f.apply(j);
+        }
+        return sum;
     }
 
 }

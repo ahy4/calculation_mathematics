@@ -4,8 +4,9 @@ import static java.lang.Math.*;
 public class Test {
 
     public static void main(String[] args) {
-        double x = 1.0e-9, x2 = 9.999e-10;
-        System.out.println((x-x2)/x);
+        a(23);
+//        double x = 1.0e-9, x2 = 9.999e-10;
+//        System.out.println((x-x2)/x);
 //        for (int i = 1;; i++) if (1.0 + Math.pow(2, -i) == 1.0) {
 //            System.out.println(i);
 //            break;
