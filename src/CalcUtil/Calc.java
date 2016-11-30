@@ -13,6 +13,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import static CalcUtil.Useful.m;
+import static CalcUtil.Useful.v;
 import static java.lang.Math.*;
 
 
@@ -115,15 +117,15 @@ public class Calc {
     }
 
     public static double matNorm1(double[][] mat) {
+        return matNorm1(matTransposition(mat));
+    }
+
+    public static double matNormInf(double[][] mat) {
         return vecNormInf(
             IntStream.range(0, mat.length)
                 .mapToDouble((i) -> vecNorm1(mat[i]))
                 .toArray()
         );
-    }
-
-    public static double matNormInf(double[][] mat) {
-        return matNorm1(matTransposition(mat));
     }
     public static double matNormFrobenius(double[][] mtx) {
         return Math.sqrt(
@@ -192,6 +194,14 @@ public class Calc {
             }
         }
         return x;
+    }
+
+    public static double zansa(double[][] a, double[] b, double[] x) {
+        return v(b).minus(m(a).multiply(v(x))).norm(NormType.TWO);
+    }
+
+    public static double soutaizansa(double[][] a, double[] b, double[] x) {
+        return zansa(a,b,x)/v(b).norm(NormType.TWO);
     }
 
     public static double sum(Function<Integer, Double> f, int start, int end) {

@@ -10,10 +10,10 @@ import static java.lang.Math.*;
 public class BisectionMethod {
     public static void main(String[] args) {
         BisectionMethod me = new BisectionMethod(
-                x -> x * x * x - 3 * x,
-                1.0e-10
+                x -> x * x * x - 3 * x + 2,
+                1.0e-12
         );
-        me.execute(1.0, 3.0);
+        me.execute(-10, 0);
     }
 
     double eps;

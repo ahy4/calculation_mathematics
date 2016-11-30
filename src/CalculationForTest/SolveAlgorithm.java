@@ -18,12 +18,11 @@ public class SolveAlgorithm {
 
     public static void main(String[] args) {
         SolveAlgorithm s = new SolveAlgorithm(
-            1.0e-12, 200,
-            //(x) -> x*x*x*x - 13.0/2*x*x*x + 15*x*x - 14*x + 4,
-            (x) -> 4*x*x*x - 39.0/2*x*x   + 30*x   - 14,
-            (x) -> 12 *x*x - 39*x         * 30
+            1.0e-12, 50,
+            (x) -> x*x*x + x*x - 5*x + 3,
+            (x) -> 3*x*x + 2*x - 5
         );
-        System.out.println(s.rSecant(-2));
+        System.out.println(s.newton(6));
     }
 
     SolveAlgorithm(double eps, int max, Function<Double, Double> f, Function<Double, Double> df) {
@@ -109,7 +108,6 @@ public class SolveAlgorithm {
     }
 
     public double rNewton(double x) {
-        head("rNewton");
         int count = 1; // 初期化で一回やってる
         double x1 = x;
         double x2 = x1 - f.apply(x1) / df.apply(x1);

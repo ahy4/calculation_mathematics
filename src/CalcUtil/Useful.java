@@ -12,8 +12,8 @@ public class Useful {
         return Vector.newVector(new double[]{v});
     }
 
-    public static Matrix m(double[]... mtxs) {
-        return Matrix.newMatrix(mtxs);
+    public static Matrix m(double[]... mtx) {
+        return Matrix.newMatrix(mtx);
     }
 
     public static Matrix m(double... xs) {

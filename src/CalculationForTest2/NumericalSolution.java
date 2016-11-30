@@ -1,5 +1,7 @@
 package CalculationForTest2;
 import static CalcUtil.Useful.*;
+//import static CalculationForTest2.ConvergenceWay.*;
+
 import CalcUtil.NormType;
 
 /**
@@ -32,11 +34,12 @@ public class NumericalSolution {
         return copy;
     }
     public static double[] copyVector(double[] ary) {
-        double[] copy = new double[ary.length];
-        for (int i = 0; i < copy.length; i++) {
-            copy[i] = ary[i];
-        }
-        return copy;
+        return ary.clone();
+//        double[] copy = new double[ary.length];
+//        for (int i = 0; i < copy.length; i++) {
+//            copy[i] = ary[i];
+//        }
+//        return copy;
     }
 
     // conditionNumber, kappa
@@ -44,13 +47,6 @@ public class NumericalSolution {
         return m(mtx).norm(type) * m(mtx).inverse().norm(type);
     }
 
-
-    public enum ConvergenceWay {
-        gosa,
-        zansa,
-        soutaigosa,
-        soutaizansa,
-    }
 
     public static boolean convergenceTest(double[][] a, double[] b, double[] x1, double[] x0, double eps, ConvergenceWay method, NormType type) {
         switch (method) {

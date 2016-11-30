@@ -13,7 +13,7 @@ public class LinearEquationTest {
     double omega = 1.2;
     double eps = 10e-12;
     int max = 100;
-    NumericalSolution.ConvergenceWay way = NumericalSolution.ConvergenceWay.soutaigosa;
+    ConvergenceWay way = ConvergenceWay.soutaigosa;
     NormType type = NormType.ONE;
 
     public LinearEquationTest(double[][] a, double[] b) {

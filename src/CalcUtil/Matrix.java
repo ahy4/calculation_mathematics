@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.function.BiFunction;
 
+
 /**
  * Created by yuya on 2015/06/13.
  */
@@ -81,6 +82,18 @@ public class Matrix {
             case F: return normFrobenius();
             default: return 0;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Matrix matrix = (Matrix) o;
+
+        return Arrays.deepEquals(mtx, matrix.mtx);
+
     }
 
     public Matrix transposition() {

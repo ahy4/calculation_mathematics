@@ -77,6 +77,18 @@ public class Vector {
                 .toArray()
         );
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Vector vector = (Vector) o;
+
+        return Arrays.equals(ary, vector.ary);
+
+    }
+
     public int hashCode() {
         return this.toString().hashCode();
     }

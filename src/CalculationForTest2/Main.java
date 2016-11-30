@@ -19,16 +19,17 @@ public class Main {
         };
         double[] b = {10,12,21};
         double[] x = {0, 0, 0};
+        double eps = 1.0e-10;
         System.out.println(
-            v(JacobiSolve.jacobiExecute(a, b, x, 0, 100, NumericalSolution.ConvergenceWay.zansa, NormType.ONE))
+            v(JacobiSolve.jacobiExecute(a, b, x, eps, 10000, ConvergenceWay.zansa, NormType.ONE))
         );
 
         System.out.println(
-            v(GaussSeidel.gaussSeidelExecute(a, b, x, 0, 100, NumericalSolution.ConvergenceWay.zansa, NormType.ONE))
+            v(GaussSeidel.gaussSeidelExecute(a, b, x, eps, 100, ConvergenceWay.zansa, NormType.ONE))
         );
 
         System.out.println(
-            v(SOR.SORExecute(a, b, x, 1.2, 0, 100, NumericalSolution.ConvergenceWay.zansa, NormType.ONE))
+            v(SOR.SORExecute(a, b, x, 1.2, eps, 100, ConvergenceWay.zansa, NormType.ONE))
         );
 
         Matrix mtx = m(

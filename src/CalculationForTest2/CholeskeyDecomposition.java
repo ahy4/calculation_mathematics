@@ -25,5 +25,9 @@ public class CholeskeyDecomposition {
             ? Math.sqrt(a[i][i] - Calc.sum((k) -> l(i, k, a), 0, i))
             : (a[i][j] - Calc.sum((k) -> l(i, k, a) * l(j, k, a), 0, j)) / l(j, j, a);
     }
+    public static void dummy() {
+        return;
+    }
+
 
 }

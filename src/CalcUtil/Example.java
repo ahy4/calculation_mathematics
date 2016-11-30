@@ -6,7 +6,20 @@ import static CalcUtil.Useful.*;
  */
 public class Example {
     public static void main(String[] args) {
+        double[] as = new double[100];
+        for (int i = 0; i < as.length; i++)
+        {
+            as[i] = Math.sqrt(i+1);
+        }
+        System.out.println(v(as).norm1());
+    }
 
+    static double a(int i, int j)
+    {
+        return Math.sqrt(2*i+j);
+    }
+
+    public static void testClient() {
         // import static CalcUtil.Useful.*;
         // ↑これやると楽です
 
@@ -37,6 +50,6 @@ public class Example {
                 m(a, b).transposition().transposition()
             )
         );
-
     }
+
 }

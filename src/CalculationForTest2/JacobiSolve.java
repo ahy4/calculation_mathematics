@@ -17,7 +17,7 @@ public class JacobiSolve extends IterationalMethods {
     private static double getSum(double[] a_i, double[] x, int i) {
         double sum = 0;
         for (int j = 0; j < x.length; j++) if (i != j) {
-                sum += a_i[j] * x[j];
+            sum += a_i[j] * x[j];
         }
         return sum;
     }
